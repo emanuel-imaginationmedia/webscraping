@@ -13,6 +13,7 @@ export type ProductVariant = {
 export const getProductVariants = async (page: Page, url: string): Promise<ProductVariant[]> => {
     await page.goto(url, {
         waitUntil: 'networkidle2',
+        timeout: 0,
     });
 
     const variants: ProductVariant[] = [];
