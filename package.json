@@ -5,12 +5,14 @@
   "main": "index.js",
   "scripts": {
     "start": "tsx src/index.ts",
+    "format-products": "tsx src/format-products.ts",
     "build": "tsup src"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@commercetools/importapi-sdk": "^4.1.0",
     "puppeteer": "^19.6.2"
   },
   "devDependencies": {
