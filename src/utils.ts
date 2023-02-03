@@ -55,18 +55,18 @@ const STONE = [
     'aquamarine',
 ];
 const COLOR = {
-    black: ['black-titanium', 'black-onyx'],
-    blue: ['turquoise', 'london-blue-topaz', 'blue-lace-agate', 'opal', 'blue-sapphire', 'blue-topaz', 'sky-blue-topaz', 'aquamarine'],
-    brown: ['honey-quartz'],
-    green: ['peridot', 'green-aventurine', 'opal', 'tsavorite', 'green-tourmaline', 'malachite'],
-    grey: ['titanium'],
-    silver: ['sterling-silver', '14k-white-gold'],
-    orange: ['citrine'],
-    pink: ['pink-sapphire'],
-    purple: ['iolite', 'rhodolite'],
-    red: ['red-onyx', 'garnet'],
-    white: ['diamond', 'pearl', 'white-topaz', 'howlite'],
-    yellow: ['14k-yellow-gold', 'gold-vermeil'],
+    '#000000': ['black-titanium', 'black-onyx'],
+    '#0000FF': ['turquoise', 'london-blue-topaz', 'blue-lace-agate', 'opal', 'blue-sapphire', 'blue-topaz', 'sky-blue-topaz', 'aquamarine'],
+    '#964B00': ['honey-quartz'],
+    '#00FF00': ['peridot', 'green-aventurine', 'opal', 'tsavorite', 'green-tourmaline', 'malachite'],
+    '#808080': ['titanium'],
+    '#C0C0C0': ['sterling-silver', '14k-white-gold'],
+    '#FFA500': ['citrine'],
+    '#FFC0CB': ['pink-sapphire'],
+    '#A020F0': ['iolite', 'rhodolite'],
+    '#FF0000': ['red-onyx', 'garnet'],
+    '#FFFFFF': ['diamond', 'pearl', 'white-topaz', 'howlite'],
+    '#FFFF00': ['14k-yellow-gold', 'gold-vermeil'],
 };
 
 export const getMetalStoneAndColor = (

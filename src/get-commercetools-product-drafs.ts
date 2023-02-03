@@ -155,7 +155,7 @@ const getProductVariants = (product: Product, category: Category): ProductVarian
             const images: Image[] = variant.images?.length
                 ? variant.images?.map((image) => {
                       return {
-                          url: image || 'https://via.placeholder.com/1470x1400',
+                          url: image?.split('w_230/')[1] || 'https://via.placeholder.com/1470x1400',
                           dimensions: { w: 1470, h: 1400 },
                       };
                   })
