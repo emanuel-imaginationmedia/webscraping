@@ -1,32 +1,22 @@
-import puppeteer from 'puppeteer';
-import { writeFileSync } from 'fs';
+import { Browser } from 'puppeteer';
 import { getProductVariants, ProductVariant } from './get-product-variants';
 
-const BASE_URL = 'https://mejuri.com/world/en/category';
+const BASE_URL = 'https://www.danarebeccadesigns.com/collections';
 
 export type Product = {
     variants: ProductVariant[];
 };
 
-export const getProductsFromACategory = async (category: string): Promise<void> => {
+export const getProductsFromACategory = async (browser: Browser, category: string) => {
     try {
-        const browser = await puppeteer.launch({
-            devtools: true,
-            defaultViewport: {
-                width: 1024,
-                height: 1080,
-            },
-            headless: true,
-            timeout: 0,
-        });
-        const page = await browser.newPage();
+        const [page] = await browser.pages()
         await page.goto(`${BASE_URL}/${category}`, {
             waitUntil: 'networkidle2',
             timeout: 0,
         });
 
         const productLinks = await page.evaluate(() => {
-            const productGroupElementList = [...document.querySelectorAll('a[data-testid="product-group-name"]')];
+            const productGroupElementList = [...document.querySelectorAll('.grid-flow-row a')];
 
             return productGroupElementList ? productGroupElementList.map((productGroup: any) => productGroup.href) : null;
         });
@@ -39,15 +29,12 @@ export const getProductsFromACategory = async (category: string): Promise<void> 
                 products.push({
                     variants: productVariants,
                 });
+                console.log('products added', products.length)
             }
         }
 
-        writeFileSync(`${category}.json`, JSON.stringify(products, null, 2));
-
-        console.log(`${category}.json created!`);
-
-        await browser.close();
+        return products
     } catch (error) {
-        console.error(error);
+        return []
     }
 };

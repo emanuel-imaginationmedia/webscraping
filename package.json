@@ -6,6 +6,8 @@
   "scripts": {
     "start": "tsx src/index.ts",
     "format-products": "tsx src/format-products.ts",
+    "get-metal-names": "tsx src/get-metal-names.ts",
+    "get-sizes": "tsx src/get-sizes.ts",
     "build": "tsup src"
   },
   "keywords": [],
