@@ -14,7 +14,7 @@ import { formatKey, formatName, formatPrice, getMetalStoneAndColor } from './uti
 
 const PRODUCT_TYPE_KEY = 'generic-product-type';
 
-type Category = 'earrings' | 'rings' | 'necklaces' | 'bracelets-anklets';
+type Category = 'earrings' | 'rings' | 'necklaces' | 'bracelets';
 
 const getProductType = (): ProductTypeKeyReference => {
     return {
@@ -46,11 +46,11 @@ const getCategories = (category: Category): CategoryKeyReference[] => {
                     key: 'necklaces',
                 },
             ];
-        case 'bracelets-anklets':
+        case 'bracelets':
             return [
                 {
                     typeId: 'category',
-                    key: 'bracelets-anklets',
+                    key: 'bracelets',
                 },
             ];
         default:
@@ -95,8 +95,8 @@ const getAttributes = (variant: ProductVariant, category: Category): Attribute[]
             productType = 'necklaces';
             break;
 
-        case 'bracelets-anklets':
-            productType = 'bracelets-anklets';
+        case 'bracelets':
+            productType = 'bracelets';
             break;
 
         default:
@@ -155,8 +155,8 @@ const getProductVariants = (product: Product, category: Category): ProductVarian
             const images: Image[] = variant.images?.length
                 ? variant.images?.map((image) => {
                       return {
-                          url: image?.split('w_230/')[1] || 'https://via.placeholder.com/1470x1400',
-                          dimensions: { w: 1470, h: 1400 },
+                          url: image || 'https://via.placeholder.com/1470x1400',
+                          dimensions: { w: 1600, h: 1600 },
                       };
                   })
                 : [];
@@ -165,13 +165,13 @@ const getProductVariants = (product: Product, category: Category): ProductVarian
                     value: {
                         type: 'centPrecision',
                         currencyCode: 'USD',
-                        centAmount: formatPrice(variant.name),
+                        centAmount: formatPrice(variant.price || '150.00') || 15000,
                     },
                 },
             ];
             const attributes = getAttributes(variant, category);
 
-            if (category === 'earrings' && variant.singlePair?.length) {
+            if (category === 'earrings' && variant.isSingle) {
                 productVariants.push({
                     key: formatKey(formatName(variant.name)) + '-' + formatKey(variant.productColorTitle) + '-' + 'single',
                     sku: formatKey(formatName(variant.name)) + '-' + formatKey(variant.productColorTitle) + '-' + 'single',
@@ -189,7 +189,7 @@ const getProductVariants = (product: Product, category: Category): ProductVarian
                             value: {
                                 type: 'centPrecision',
                                 currencyCode: 'USD',
-                                centAmount: formatPrice(variant.name) * 2,
+                                centAmount: (formatPrice(variant.price || '195.00') * 2) || 15000,
                             },
                         },
                     ],

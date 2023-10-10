@@ -1,15 +1,11 @@
 export const formatName = (text: string): string => {
-    return text.split(' - ')[0];
+    return text;
 };
 
 export const formatPrice = (text: string): number => {
     return (
-        parseInt(
-            text
-                .split(' - ')[1]
-                .replace(/[^0-9]/g, ' ')
-                .replace(/\s+/g, ' ')
-                .trim()
+        Number(
+            text.replace(',', '').trim()
         ) * 100
     );
 };
@@ -24,7 +20,7 @@ export const formatKey = (text: string): string => {
         .join('-');
 };
 
-const METAL = ['14k-white-gold', '14k-yellow-gold', 'gold-vermeil', 'sterling-silver', 'titanium', 'black-titanium'];
+const METAL = ['14k-white-gold', '14k-yellow-gold', 'gold-vermeil', 'sterling-silver', 'titanium', 'black-titanium', 'yellow-gold', 'rose-gold', 'white-gold', 'black-rhodium'];
 const STONE = [
     'diamond',
     'gemstone',
@@ -55,18 +51,18 @@ const STONE = [
     'aquamarine',
 ];
 const COLOR = {
-    '#000000': ['black-titanium', 'black-onyx'],
+    '#000000': ['black-titanium', 'black-onyx', 'black-rhodium'],
     '#0000FF': ['turquoise', 'london-blue-topaz', 'blue-lace-agate', 'opal', 'blue-sapphire', 'blue-topaz', 'sky-blue-topaz', 'aquamarine'],
     '#964B00': ['honey-quartz'],
     '#00FF00': ['peridot', 'green-aventurine', 'opal', 'tsavorite', 'green-tourmaline', 'malachite'],
     '#808080': ['titanium'],
     '#C0C0C0': ['sterling-silver', '14k-white-gold'],
     '#FFA500': ['citrine'],
-    '#FFC0CB': ['pink-sapphire'],
+    '#E5B898': ['pink-sapphire', 'rose-gold'],
     '#A020F0': ['iolite', 'rhodolite'],
     '#FF0000': ['red-onyx', 'garnet'],
-    '#FFFFFF': ['diamond', 'pearl', 'white-topaz', 'howlite'],
-    '#FFFF00': ['14k-yellow-gold', 'gold-vermeil'],
+    '#E5D598': ['14k-yellow-gold', 'gold-vermeil', 'yellow-gold'],
+    '#C8C8C8': ['diamond', 'pearl', 'white-topaz', 'howlite', "white-gold"],
 };
 
 export const getMetalStoneAndColor = (
@@ -95,7 +91,7 @@ export const getMetalStoneAndColor = (
                 color.push(colorKey);
             }
         }
-    });
+    })
 
     if (!metal.length && !stone.length) {
         throw new Error('Variant without attributes');
